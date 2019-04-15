@@ -1,0 +1,18 @@
+FROM alpine:3.6
+
+MAINTAINER Dnd <tech@dnd.fr>
+
+RUN apk update && \
+    apk upgrade && \
+    apk add varnish=4.1.9-r0
+
+ADD start.sh /start.sh
+ADD varnish.vcl /etc/varnish/varnish.vcl
+
+ENV VCL_CONFIG /etc/varnish/varnish.vcl
+ENV CACHE_SIZE 256m
+ENV VARNISHD_PARAMS -p default_ttl=3600 -p default_grace=3600
+
+EXPOSE 80
+
+CMD ["/start.sh"]

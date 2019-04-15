@@ -1,0 +1,132 @@
+# Docker
+/magento/docker/logs/*
+/magento/docker/data/*
+
+# Created by .ignore support plugin (hsz.mobi)
+### SublimeText template
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+# workspace files are user-specific
+*.sublime-workspace
+
+# Sublime-github package stores a github token in this file
+# https://packagecontrol.io/packages/sublime-github
+GitHub.sublime-settings
+
+### OSX template
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### Linux template
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+### Vim template
+# swap
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+# auto-generated tag files
+tags
+.user.ini
+
+# All
+
+/.buildpath
+/.cache
+/.metadata
+/.project
+/.settings
+atlassian*
+/nbproject
+/sitemap
+/sitemap.xml
+/.gitattributes
+/node_modules
+/.grunt
+
+# Magento
+/magento/src/.github
+/magento/src/.htaccess
+/magento/src/.php_cs.dist
+/magento/src/.travis.yml
+/magento/src/CHANGELOG.md
+/magento/src/CONTRIBUTING.md
+/magento/src/COPYING.txt
+/magento/src/ISSUE_TEMPLATE.md
+/magento/src/LICENSE.txt
+/magento/src/LICENSE_EE.txt
+/magento/src/LICENSE_AFL.txt
+/magento/src/app/*.*
+/magento/src/app/etc/*.*
+/magento/src/*.sample
+/magento/src/supervisord.*
+/magento/src/bin
+/magento/src/generated
+/magento/src/index.php
+/magento/src/lib
+/magento/src/node_modules
+/magento/src/package.json
+/magento/src/package-lock.json
+/magento/src/phpserver
+/magento/src/pub
+/magento/src/setup
+/magento/src/update
+/magento/src/var
+/magento/src/vendor
+!/magento/src/app/etc/config.php
+!/magento/src/app/etc/env.php.dev
+
+/magento/src/dev/*
+!/magento/src/dev/tools
+/magento/src/dev/tools/*
+!/magento/src/dev/tools/grunt/
+/magento/src/dev/tools/grunt/*
+!/magento/src/dev/tools/grunt/configs/
+/magento/src/dev/tools/grunt/configs/*
+!/magento/src/dev/tools/grunt/configs/themes.js
+
+
+### Custom gitignore
+.idea
+/.env
+!/.env.dist
+/docker-compose.yml
+!/docker-compose.yml.dist

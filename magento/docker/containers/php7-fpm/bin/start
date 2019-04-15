@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Start supervisor
+sudo /usr/bin/supervisord

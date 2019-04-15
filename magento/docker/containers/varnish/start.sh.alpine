@@ -1,0 +1,3 @@
+#!/bin/sh
+
+varnishd -s malloc,${CACHE_SIZE} -a :80 -f ${VCL_CONFIG} ${VARNISHD_PARAMS}

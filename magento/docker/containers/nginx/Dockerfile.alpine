@@ -1,0 +1,41 @@
+FROM alpine:3.8
+
+MAINTAINER Dnd <tech@dnd.fr>
+
+RUN apk update && \
+    apk add --no-cache nginx vim supervisor procps shadow tzdata
+
+RUN mkdir /etc/nginx/cert
+
+ADD cert/* /etc/nginx/ssl/
+
+ARG APP_PROJECT_TYPE
+
+ADD bin/* /usr/local/bin/
+ADD conf/vhost.magento.conf /etc/nginx/sites-available/
+ADD conf/vhost.magento_ssl.conf /etc/nginx/sites-available/
+RUN mkdir /etc/nginx/sites-enabled
+RUN ln -s /etc/nginx/sites-available/vhost.magento.conf /etc/nginx/sites-enabled/magento
+RUN ln -s /etc/nginx/sites-available/vhost.magento_ssl.conf /etc/nginx/sites-enabled/magento_ssl
+
+EXPOSE 80 443
+
+#Copy supervisord.conf
+COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+ENV UPLOAD_MAX_FILESIZE 64M
+ENV FPM_HOST fpm
+ENV FPM_PORT 9000
+ENV MAGENTO_ROOT /var/www/project/magento
+ENV MAGENTO_RUN_MODE developer
+
+RUN ["chmod", "+x", "/usr/local/bin/docker-environment"]
+
+ENTRYPOINT ["/usr/local/bin/docker-environment"]
+
+RUN usermod -u 1000 nginx
+
+RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && \
+    echo "Europe/Paris" >  /etc/timezone
+
+CMD ["/usr/bin/supervisord"]

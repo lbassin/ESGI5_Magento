@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+    db:
+        image: mariadb:10.2
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./magento/docker/data/mysql/:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASS}
+
+    fpm:
+        build:
+            context: ./magento/docker/containers/php7-fpm
+            args:
+                APP_PROJECT_DIR_NAME: ${APP_PROJECT_DIR_NAME}
+                HOST_USER_ID: ${HOST_USER_ID}
+        expose:
+            - "9000"
+        volumes:
+            - "nfsmount:/var/www/project/magento"
+            - ~/.ssh:/home/www-data/.ssh
+        env_file: .env
+
+    webserver:
+        build:
+            context: ./magento/docker/containers/nginx
+            args:
+                APP_PROJECT_TYPE: ${APP_PROJECT_TYPE}
+        environment:
+            APP_SERVER_NAME: ${APP_SERVER_NAME}
+            APP_PROJECT_DIR_NAME: ${APP_PROJECT_DIR_NAME}
+            MAGE_IS_DEVELOPER_MODE: ${MAGE_IS_DEVELOPER_MODE}
+        ports:
+            - "443:443"
+        volumes:
+            - "nfsmount:/var/www/project/magento"
+
+    cache-proxy:
+        build:
+            context: ./magento/docker/containers/varnish
+        depends_on:
+            - webserver
+            - fpm
+        ports:
+            - "80:80"
+
+    cache-storage:
+        image: redis:3.2-alpine
+        expose:
+            - "6379"
+
+    mailhog:
+        image: mailhog/mailhog
+        expose:
+            - "1025"
+        ports:
+            - "8025:8025"
+
+# enable NFS
+volumes:
+    nfsmount:
+        driver: local
+        driver_opts:
+            type: nfs
+            o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
+            device: ":$PWD/magento/src"
