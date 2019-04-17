@@ -28,7 +28,7 @@ class Department extends AbstractModel implements DepartmentInterface, IdentityI
         return [self::CACHE_TAG.'_'.$this->getId()];
     }
 
-    public function getId(): int
+    public function getId(): ?string
     {
         return $this->getData(self::ID);
     }

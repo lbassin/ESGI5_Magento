@@ -13,7 +13,7 @@ interface DepartmentInterface
     const TITLE = 'title';
     const CONTENT = 'content';
 
-    public function getId(): int;
+    public function getId(): ?string;
     public function setId($id): self;
 
     public function getTitle(): string;

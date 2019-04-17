@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Esgi_Job::job_head" title="Jobs" module="Esgi_Job" sortOrder="100" resource="Esgi_Job::job_head" />
+        <add id="Esgi_Job::department" title="Departments" module="Esgi_Job" sortOrder="10" parent="Esgi_Job::job_head" action="job/department" resource="Esgi_Job::department" />
+        <add id="Esgi_Job::job" title="Jobs" module="Esgi_Job" sortOrder="20" parent="Esgi_Job::job_head" action="job/job" resource="Esgi_Job::job" />
+    </menu>
+</config>

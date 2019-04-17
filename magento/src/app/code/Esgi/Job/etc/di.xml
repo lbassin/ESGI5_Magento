@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Esgi\Job\Api\Data\DepartmentInterface" type="Esgi\Job\Model\Department"/>
+    <preference for="Esgi\Job\Api\DepartmentRepositoryInterface" type="Esgi\Job\Model\DepartmentRepository"/>
+    <preference for="Esgi\Job\Api\Data\DepartmentSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+</config>
