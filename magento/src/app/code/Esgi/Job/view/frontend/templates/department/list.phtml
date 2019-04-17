@@ -1,0 +1,10 @@
+<?php
+/** @var $block Esgi\Job\Block\Department */
+$departments = $block->getDepartments();
+?>
+
+<ul id="department-list">
+    <?php foreach ($departments as $department) : ?>
+        <li><?php echo $department->getTitle(); ?></li>
+    <?php endforeach; ?>
+</ul>
